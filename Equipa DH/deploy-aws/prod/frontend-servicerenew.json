@@ -1,0 +1,5 @@
+{
+    "cluster": "mdhc-sipiact",
+    "service": "svc-equipadh-fe",
+    "taskDefinitionArn": "arn:aws:ecs:sa-east-1:495382460401:task-definition/equipadh-fe:4"
+}

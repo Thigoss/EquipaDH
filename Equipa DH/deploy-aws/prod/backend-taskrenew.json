@@ -1,0 +1,4 @@
+{
+    "image": "495382460401.dkr.ecr.sa-east-1.amazonaws.com/equipadh/backend:0.3",
+    "taskDefinition": "equipadh-be"
+}

@@ -1,0 +1,28 @@
+version: "3.1"
+services:
+  equipadh-app:
+    image: mdh/equipadh-app:latest
+    container_name: equipadh-app
+    env_file:
+      - secrets.env
+    volumes:
+      - ./volumes/backend/storage:/var/www/html/storage
+      - ./volumes/backend/documentos/adesao:/var/www/html/public/documentos/adesao
+      - ./volumes/backend/documentos/convocacao:/var/www/html/public/documentos/convocacao
+      - ./volumes/backend/documentos/programas:/var/www/html/public/documentos/programas
+      - ./volumes/backend/documentos/recursos:/var/www/html/public/documentos/recursos
+      - ./volumes/backend/documentos/users:/var/www/html/public/documentos/users
+      - ./volumes/backend/documentos/solicitacoes:/var/www/html/public/documentos/solicitacoes
+      - ./volumes/backend/documentos/classificacaomunicipal:/var/www/html/public/documentos/classificacaomunicipal
+      - ./volumes/backend/documentos/classificacaoestadual:/var/www/html/public/documentos/classificacaoestadual
+      - ./volumes/backend/documentos/configuracao:/var/www/html/public/documentos/configuracao
+    networks: 
+      - default_equipadh
+  equipadh-web:
+    image: mdh/equipadh-web:latest
+    container_name: equipadh-web
+    networks: 
+      - default_equipadh
+networks:
+  default_equipadh:
+    driver: bridge

@@ -1,0 +1,35 @@
+#Realiza o Build do frontend
+FROM node:16 AS builder
+
+RUN mkdir /build && chown node:node /build
+
+WORKDIR /build
+
+COPY ./frontend .
+
+# RUN rm -f ./package-lock.json
+
+RUN npm install && npm run build
+
+#Cria Imagem do frontend
+FROM php:7.2-apache
+
+LABEL vendor="Ministerio dos Direitos Humanos e da Cidadania"
+
+#Copia os fontes
+COPY --from=builder ./build/dist /var/www/html
+COPY ./deploy/dev/frontend/conf/.htaccess /var/www/html/.htaccess
+
+RUN a2enmod rewrite
+RUN a2enmod headers
+
+#Tunning do Apache
+RUN /bin/bash -c 'find /var/www/html -type f -exec chmod 0640 {} \;'
+RUN /bin/bash -c 'find /var/www/html -type d -exec chmod 2750 {} \;'
+RUN chown -R www-data. /var/www/html
+RUN echo "ServerName localhost" >> /etc/apache2/conf-enabled/optional.conf
+RUN echo "ServerTokens Prod" >> /etc/apache2/conf-enabled/optional.conf
+RUN echo "ServerSignature Off" >> /etc/apache2/conf-enabled/optional.conf
+RUN echo "TraceEnable Off" >> /etc/apache2/conf-enabled/optional.conf
+
+WORKDIR /var/www/html
