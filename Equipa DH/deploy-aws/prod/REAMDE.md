@@ -1,1 +1,0 @@
-https://dev.azure.com/mmfdh-ti/Equipa%20DH/_wiki/wikis/Equipa-DH.wiki/6388/Instru%C3%A7%C3%B5es-de-Implanta%C3%A7%C3%A3o-AWS-Produ%C3%A7%C3%A3o
